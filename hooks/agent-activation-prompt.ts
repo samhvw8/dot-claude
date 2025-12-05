@@ -20,7 +20,6 @@ interface PromptTriggers {
 }
 
 // Confidence level configuration - easily extensible
-// Add new levels by adding to this array (order matters: highest first)
 interface ConfidenceLevelConfig {
     level: string;
     minScore: number;
@@ -28,65 +27,63 @@ interface ConfidenceLevelConfig {
     icon: string;
     showDesc: boolean;
     displayLimit: number;
-    actionTemplate: string;  // Use {skill} as placeholder
+    actionTemplate: string;
 }
 
 const CONFIDENCE_LEVELS: ConfidenceLevelConfig[] = [
     {
         level: 'critical',
         minScore: 12.0,
-        enforcement: 'REQUIRED',
-        icon: '🔴',
+        enforcement: 'HIGHLY RECOMMENDED',
+        icon: '⭐',
         showDesc: true,
         displayLimit: 5,
-        actionTemplate: '🔴 ACTION: Use Skill tool with "{skill}" NOW'
+        actionTemplate: '🎯 ACTION: Use Task(subagent_type="{agent}") NOW'
     },
     {
         level: 'high',
         minScore: 8.0,
         enforcement: 'RECOMMENDED',
-        icon: '🟠',
+        icon: '💎',
         showDesc: true,
         displayLimit: 5,
-        actionTemplate: '🟠 RECOMMENDED: Use "{skill}" skill'
+        actionTemplate: '💎 RECOMMENDED: Use "{agent}" agent'
     },
     {
         level: 'medium',
         minScore: 4.0,
         enforcement: 'SUGGESTED',
-        icon: '🟡',
+        icon: '💡',
         showDesc: true,
         displayLimit: 3,
-        actionTemplate: '🟡 SUGGESTED: Consider "{skill}" skill'
+        actionTemplate: '💡 SUGGESTED: Consider "{agent}" agent'
     },
     {
         level: 'low',
         minScore: 2.0,
-        enforcement: 'OPTIONAL',
-        icon: '🟢',
+        enforcement: 'AVAILABLE',
+        icon: '📌',
         showDesc: false,
         displayLimit: 2,
-        actionTemplate: '🟢 TIP: Skills available if needed'
+        actionTemplate: '📌 TIP: Agents available if needed'
     }
-    // Add more levels here as needed:
-    // { level: 'hint', minScore: 1.0, enforcement: 'HINT', icon: '⚪', ... }
 ];
 
-// Minimum score to show any skill
 const MIN_SCORE = CONFIDENCE_LEVELS[CONFIDENCE_LEVELS.length - 1].minScore;
 
-interface SkillRule {
-    type: 'guardrail' | 'domain';
+interface AgentRule {
+    type: 'exploration' | 'architecture' | 'language' | 'quality' | 'infrastructure' | 'design';
     enforcement: 'block' | 'suggest' | 'warn';
     priority: 'critical' | 'high' | 'medium' | 'low';
     description?: string;
+    model?: 'haiku' | 'sonnet' | 'opus';
     promptTriggers?: PromptTriggers;
 }
 
-interface SkillRules {
+interface AgentRules {
     version: string;
     description?: string;
-    skills: Record<string, SkillRule>;
+    agents: Record<string, AgentRule>;
 }
 
 interface MatchDetail {
@@ -95,13 +92,18 @@ interface MatchDetail {
     matchType: 'keyword' | 'intent';
 }
 
-interface MatchedSkill {
+interface MatchedAgent {
     name: string;
     matchType: 'keyword' | 'intent';
-    config: SkillRule;
+    config: AgentRule;
     matches: MatchDetail[];
     score: number;
     confidenceConfig: ConfidenceLevelConfig;
+}
+
+interface AgentRulesPaths {
+    global: string | null;
+    project: string | null;
 }
 
 // Priority multipliers for scoring
@@ -117,18 +119,12 @@ const DIMINISHING_FACTOR = 0.4;
 
 /**
  * Calculate weight for a keyword based on specificity
- * Longer, multi-word keywords are more specific = higher weight
  */
 function calculateKeywordWeight(keyword: string): number {
     const words = keyword.split(/\s+/).length;
     const length = keyword.length;
-
-    // Base weight from length (normalized)
     const lengthWeight = Math.min(length / 15, 2.0);
-
-    // Bonus for multi-word phrases (more specific)
     const wordBonus = Math.min((words - 1) * 0.3, 1.0);
-
     return Math.max(0.5, lengthWeight + wordBonus);
 }
 
@@ -147,20 +143,13 @@ function parseWeightedKeyword(kw: WeightedKeyword): { value: string; weight: num
  */
 function calculateScore(matches: MatchDetail[], priority: string): number {
     if (matches.length === 0) return 0;
-
-    // Sort matches by weight descending
     const sortedMatches = [...matches].sort((a, b) => b.weight - a.weight);
-
-    // Apply diminishing returns: each subsequent match contributes less
     let totalWeight = 0;
     sortedMatches.forEach((match, index) => {
         const diminishingMultiplier = 1 / (1 + DIMINISHING_FACTOR * index);
         totalWeight += match.weight * diminishingMultiplier;
     });
-
-    // Apply priority multiplier
     const priorityMult = PRIORITY_MULTIPLIER[priority] || 1.0;
-
     return totalWeight * priorityMult;
 }
 
@@ -173,19 +162,19 @@ function getConfidenceConfig(score: number): ConfidenceLevelConfig {
             return config;
         }
     }
-    // Fallback to lowest level
     return CONFIDENCE_LEVELS[CONFIDENCE_LEVELS.length - 1];
 }
 
 /**
- * Escape special regex characters in a string
+ * Escape special regex characters
  */
 function escapeRegex(str: string): string {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 /**
- * Orchestration guidance reminder
+ * Orchestration guidance for subagent delegation
+ * Inspired by: https://github.com/PaulRBerg/ai-flags
  */
 const ORCHESTRATION_GUIDANCE = `
 📋 EXECUTION PRIORITY:
@@ -193,20 +182,22 @@ const ORCHESTRATION_GUIDANCE = `
   2. Skill (Skill tool) → If no specialized agent
   3. general-purpose agent OR manual → Last resort
 
+📋 DELEGATION STRATEGY:
+  • Independent tasks → Spawn multiple subagents in PARALLEL (single message, multiple Task calls)
+  • Dependent tasks → Use single subagent for entire sequential workflow
+  • Hybrid workflows → Handle prerequisites first, then parallelize independent work
+
 ⚠️ INDEPENDENCE RULE: Each task MUST be self-contained—no dependencies on other concurrent tasks.
+
+⚡ ORCHESTRATE, DON'T IMPLEMENT: Delegate all implementation to subagents. Review their work at the end.
 `;
 
-interface SkillRulesPaths {
-    global: string | null;
-    project: string | null;
-}
-
 /**
- * Find both global and project-level skill-rules.json paths
+ * Find both global and project-level agent-rules.json paths
  */
-function findSkillRulesPaths(cwd: string): SkillRulesPaths {
-    const globalRulesPath = join(homedir(), '.claude', 'skills', 'skill-rules.json');
-    const projectRulesPath = join(cwd, '.claude', 'skills', 'skill-rules.json');
+function findAgentRulesPaths(cwd: string): AgentRulesPaths {
+    const globalRulesPath = join(homedir(), '.claude', 'agents', 'agent-rules.json');
+    const projectRulesPath = join(cwd, '.claude', 'agents', 'agent-rules.json');
 
     return {
         global: existsSync(globalRulesPath) ? globalRulesPath : null,
@@ -215,23 +206,23 @@ function findSkillRulesPaths(cwd: string): SkillRulesPaths {
 }
 
 /**
- * Load skill rules from a file path
+ * Load agent rules from a file path
  */
-function loadSkillRules(path: string): SkillRules | null {
+function loadAgentRules(path: string): AgentRules | null {
     try {
         const content = readFileSync(path, 'utf-8');
         return JSON.parse(content);
     } catch (err) {
-        console.error(`Warning: Failed to load skill rules from ${path}:`, err);
+        console.error(`Warning: Failed to load agent rules from ${path}:`, err);
         return null;
     }
 }
 
 /**
- * Merge global and project skill rules
- * Project rules override global rules for the same skill name
+ * Merge global and project agent rules
+ * Project rules override global rules for the same agent name
  */
-function mergeSkillRules(global: SkillRules | null, project: SkillRules | null): SkillRules | null {
+function mergeAgentRules(global: AgentRules | null, project: AgentRules | null): AgentRules | null {
     // If no rules exist, return null
     if (!global && !project) {
         return null;
@@ -242,14 +233,14 @@ function mergeSkillRules(global: SkillRules | null, project: SkillRules | null):
     if (!project) return global;
 
     // Merge both: project overrides global
-    const merged: SkillRules = {
+    const merged: AgentRules = {
         version: project.version || global.version,
         description: project.description || global.description,
-        skills: {
-            // Start with global skills
-            ...global.skills,
-            // Override with project skills
-            ...project.skills
+        agents: {
+            // Start with global agents
+            ...global.agents,
+            // Override with project agents
+            ...project.agents
         }
     };
 
@@ -263,26 +254,26 @@ async function main() {
         const data: HookInput = JSON.parse(input);
         const prompt = data.prompt.toLowerCase();
 
-        // Find both global and project-level skill-rules.json
-        const paths = findSkillRulesPaths(data.cwd || process.cwd());
+        // Find both global and project-level agent-rules.json
+        const paths = findAgentRulesPaths(data.cwd || process.cwd());
 
         // Load both rule sets
-        const globalRules = paths.global ? loadSkillRules(paths.global) : null;
-        const projectRules = paths.project ? loadSkillRules(paths.project) : null;
+        const globalRules = paths.global ? loadAgentRules(paths.global) : null;
+        const projectRules = paths.project ? loadAgentRules(paths.project) : null;
 
         // Merge rules (project overrides global)
-        const rules = mergeSkillRules(globalRules, projectRules);
+        const rules = mergeAgentRules(globalRules, projectRules);
 
         // If no rules are available, exit silently
         if (!rules) {
             process.exit(0);
         }
 
-        // Track matched skills with scoring
-        const matchedSkillsMap = new Map<string, MatchedSkill>();
+        // Track matched agents with scoring
+        const matchedAgentsMap = new Map<string, MatchedAgent>();
 
-        // Check each skill for matches
-        for (const [skillName, config] of Object.entries(rules.skills)) {
+        // Check each agent for matches
+        for (const [agentName, config] of Object.entries(rules.agents)) {
             const triggers = config.promptTriggers;
             if (!triggers) continue;
 
@@ -295,7 +286,6 @@ async function main() {
                     const kwLower = value.toLowerCase();
 
                     // For short keywords (<=4 chars), use word boundary matching
-                    // to avoid false positives (e.g., "doc" matching "docker")
                     let matched = false;
                     if (kwLower.length <= 4) {
                         const wordBoundaryRegex = new RegExp(`\\b${escapeRegex(kwLower)}\\b`, 'i');
@@ -305,11 +295,7 @@ async function main() {
                     }
 
                     if (matched) {
-                        matches.push({
-                            value,
-                            weight,
-                            matchType: 'keyword'
-                        });
+                        matches.push({ value, weight, matchType: 'keyword' });
                     }
                 }
             }
@@ -322,14 +308,9 @@ async function main() {
                         const regex = new RegExp(value, 'i');
                         if (regex.test(data.prompt)) {
                             // Pattern matches get a slight bonus (more intentional)
-                            matches.push({
-                                value,
-                                weight: weight * 1.2,
-                                matchType: 'intent'
-                            });
+                            matches.push({ value, weight: weight * 1.2, matchType: 'intent' });
                         }
                     } catch (err) {
-                        // Skip invalid regex patterns
                         continue;
                     }
                 }
@@ -340,8 +321,8 @@ async function main() {
                 const score = calculateScore(matches, config.priority);
                 const confidenceConfig = getConfidenceConfig(score);
 
-                matchedSkillsMap.set(skillName, {
-                    name: skillName,
+                matchedAgentsMap.set(agentName, {
+                    name: agentName,
                     matchType: matches[0].matchType,
                     config,
                     matches,
@@ -352,52 +333,54 @@ async function main() {
         }
 
         // No matches - exit silently
-        if (matchedSkillsMap.size === 0) {
+        if (matchedAgentsMap.size === 0) {
             process.exit(0);
         }
 
-        // Sort all matched skills by score (descending) and filter below minimum
-        const matchedSkills = Array.from(matchedSkillsMap.values())
-            .filter(s => s.score >= MIN_SCORE)
+        // Sort by score and filter below minimum
+        const matchedAgents = Array.from(matchedAgentsMap.values())
+            .filter(a => a.score >= MIN_SCORE)
             .sort((a, b) => b.score - a.score);
 
-        // All matches filtered out - exit silently
-        if (matchedSkills.length === 0) {
+        if (matchedAgents.length === 0) {
             process.exit(0);
         }
 
         // Group by confidence level
-        const byLevel = new Map<string, MatchedSkill[]>();
+        const byLevel = new Map<string, MatchedAgent[]>();
         for (const levelConfig of CONFIDENCE_LEVELS) {
-            byLevel.set(levelConfig.level, matchedSkills.filter(
-                s => s.confidenceConfig.level === levelConfig.level
+            byLevel.set(levelConfig.level, matchedAgents.filter(
+                a => a.confidenceConfig.level === levelConfig.level
             ));
         }
 
         // Build output message
         let output = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
-        output += '🎯 SKILL ACTIVATION\n';
+        output += '💡 SPECIALIZED AGENTS AVAILABLE\n';
         output += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
 
         // Display each confidence level using config
         for (const levelConfig of CONFIDENCE_LEVELS) {
-            const skills = byLevel.get(levelConfig.level) || [];
-            if (skills.length === 0) continue;
+            const agents = byLevel.get(levelConfig.level) || [];
+            if (agents.length === 0) continue;
 
-            const displaySkills = skills.slice(0, levelConfig.displayLimit);
+            const displayAgents = agents.slice(0, levelConfig.displayLimit);
 
             output += `${levelConfig.icon} ${levelConfig.enforcement}:\n`;
-            displaySkills.forEach(skill => {
-                output += `  → ${skill.name} [${skill.score.toFixed(1)}]`;
-                if (levelConfig.showDesc && skill.config.description) {
-                    const shortDesc = skill.config.description.split('.')[0];
+            displayAgents.forEach(agent => {
+                output += `  → ${agent.name} [${agent.score.toFixed(1)}]`;
+                if (agent.config.model) {
+                    output += ` (${agent.config.model})`;
+                }
+                if (levelConfig.showDesc && agent.config.description) {
+                    const shortDesc = agent.config.description.split('.')[0];
                     output += ` - ${shortDesc}`;
                 }
                 output += '\n';
             });
 
-            if (skills.length > levelConfig.displayLimit) {
-                output += `  ... +${skills.length - levelConfig.displayLimit} more\n`;
+            if (agents.length > levelConfig.displayLimit) {
+                output += `  ... +${agents.length - levelConfig.displayLimit} more\n`;
             }
             output += '\n';
         }
@@ -407,8 +390,8 @@ async function main() {
         output += '\n';
 
         // Action instruction based on best match
-        const bestMatch = matchedSkills[0];
-        const actionText = bestMatch.confidenceConfig.actionTemplate.replace('{skill}', bestMatch.name);
+        const bestMatch = matchedAgents[0];
+        const actionText = bestMatch.confidenceConfig.actionTemplate.replace('{agent}', bestMatch.name);
         output += actionText + '\n';
 
         output += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
@@ -418,12 +401,12 @@ async function main() {
     } catch (err) {
         // Log error to stderr but don't fail the hook
         // This ensures Claude Code continues working even if hook has issues
-        console.error('Error in skill-activation-prompt hook:', err);
+        console.error('Error in agent-activation-prompt hook:', err);
         process.exit(0); // Exit successfully to not block workflow
     }
 }
 
 main().catch(err => {
-    console.error('Uncaught error in skill-activation-prompt:', err);
+    console.error('Uncaught error in agent-activation-prompt:', err);
     process.exit(0); // Exit successfully to not block workflow
 });
