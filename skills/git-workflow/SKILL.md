@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: Comprehensive git workflow management covering all git commands, best practices, commit organization, branching strategies, and atomic commit principles. Triggers on git commit, git push, git branch, git merge, git rebase, stage changes, commit message, pull request, code review, version control, repository management, git history, and commit organization. Enforces single-responsibility commits by analyzing staged changes and dividing them into focused, atomic commits.
+description: "Git workflow management with atomic commit principles. Capabilities: commit organization, branching strategies, merge/rebase workflows, PR management, history cleanup, staged change analysis, single-responsibility commits. Actions: commit, push, pull, merge, rebase, branch, stage, stash git operations. Keywords: git commit, git push, git pull, git merge, git rebase, git branch, git stash, atomic commit, commit message, conventional commits, branching strategy, GitFlow, trunk-based, PR, pull request, code review, git history, cherry-pick, squash, amend, interactive rebase, staged changes. Use when: organizing commits, creating branches, merging code, rebasing, writing commit messages, managing PRs, cleaning git history, analyzing staged changes."
 ---
 
 # Git Workflow & Best Practices

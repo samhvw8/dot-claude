@@ -1,6 +1,6 @@
 ---
 name: databases
-description: Work with MongoDB (document database, BSON documents, aggregation pipelines, Atlas cloud) and PostgreSQL (relational database, SQL queries, psql CLI, pgAdmin). Use when designing database schemas, writing queries and aggregations, optimizing indexes for performance, performing database migrations, configuring replication and sharding, implementing backup and restore strategies, managing database users and permissions, analyzing query performance, or administering production databases.
+description: "MongoDB and PostgreSQL database administration. Databases: MongoDB (document store, aggregation, Atlas), PostgreSQL (relational, SQL, psql). Capabilities: schema design, query optimization, indexing, migrations, replication, sharding, backup/restore, user management, performance analysis. Actions: design, query, optimize, migrate, backup, restore, index, shard databases. Keywords: MongoDB, PostgreSQL, SQL, NoSQL, BSON, aggregation pipeline, Atlas, psql, pgAdmin, schema design, index, query optimization, EXPLAIN, replication, sharding, backup, restore, migration, ORM, Prisma, Mongoose, connection pooling, transactions, ACID. Use when: designing database schemas, writing complex queries, optimizing query performance, creating indexes, performing migrations, setting up replication, implementing backup strategies, managing database permissions, troubleshooting slow queries."
 license: MIT
 ---
 

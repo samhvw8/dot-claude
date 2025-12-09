@@ -1,6 +1,6 @@
 ---
 name: pdf
-description: Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale.
+description: "PDF document processing and manipulation. Tools: Python (PyPDF2, pdfplumber, reportlab), CLI tools. Capabilities: text extraction, table extraction, form filling, merge/split documents, create PDFs, add annotations, watermarks, page manipulation. Actions: extract, create, merge, split, fill, annotate PDFs. Keywords: PDF, text extraction, table extraction, form fill, PDF form, merge PDF, split PDF, create PDF, reportlab, PyPDF2, pdfplumber, annotation, watermark, page rotation, PDF metadata, bookmarks, OCR. Use when: extracting text/tables from PDFs, filling PDF forms, merging/splitting documents, creating PDFs programmatically, adding annotations/watermarks, processing PDFs at scale."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 

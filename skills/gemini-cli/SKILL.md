@@ -1,6 +1,6 @@
 ---
 name: gemini-cli
-description: Wield Google's Gemini CLI as a powerful auxiliary tool for code generation, review, analysis, and web research. Use when tasks benefit from a second AI perspective, current web information via Google Search, codebase architecture analysis, or parallel code generation. Also use when user explicitly requests Gemini operations.
+description: "Google Gemini CLI orchestration for AI-assisted development. Capabilities: second opinion/cross-validation, real-time web search (Google Search), codebase architecture analysis, parallel code generation, code review from different perspective. Actions: query, search, analyze, generate, review with Gemini. Keywords: Gemini CLI, second opinion, cross-validation, Google Search, web research, current information, parallel AI, code review, architecture analysis, gemini prompt, AI comparison, real-time search, alternative perspective, code generation. Use when: needing second AI opinion, searching current web information, analyzing codebase architecture, generating code in parallel, getting alternative code review, researching current events/docs."
 allowed-tools:
   - Bash
   - Read

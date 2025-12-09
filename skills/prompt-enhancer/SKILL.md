@@ -1,6 +1,6 @@
 ---
 name: prompt-enhancer
-description: Transform unclear or verbose prompts into concise, well-structured prompts for AI agents and LLMs. Optimize prompts for clarity, structure, and token efficiency. Use when user requests "improve prompt", "enhance prompt", "optimize LLM output", "reduce tokens", or sends unclear/verbose requests.
+description: "Prompt engineering and optimization for AI/LLMs. Capabilities: transform unclear prompts, reduce token usage, improve structure, add constraints, optimize for specific models, backward-compatible rewrites. Actions: improve, enhance, optimize, refactor, compress prompts. Keywords: prompt engineering, prompt optimization, token efficiency, LLM prompt, AI prompt, clarity, structure, system prompt, user prompt, few-shot, chain-of-thought, instruction tuning, prompt compression, token reduction, prompt rewrite, semantic preservation. Use when: improving unclear prompts, reducing token consumption, optimizing LLM outputs, restructuring verbose requests, creating system prompts, enhancing prompt clarity."
 ---
 
 # Prompt Enhancer Skill

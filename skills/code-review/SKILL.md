@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Use when receiving code review feedback (especially if unclear or technically questionable), when completing tasks or major features requiring review before proceeding, or before making any completion/success claims. Covers three practices - receiving feedback with technical rigor over performative agreement, requesting reviews via code-reviewer subagent, and verification gates requiring evidence before any status claims. Essential for subagent-driven development, pull requests, and preventing false completion claims.
+description: "Code review practices with technical rigor and verification gates. Practices: receiving feedback, requesting reviews, verification gates. Capabilities: technical evaluation, evidence-based claims, PR review, subagent-driven review, completion verification. Actions: review, evaluate, verify, validate code changes. Keywords: code review, PR review, pull request, technical feedback, review feedback, completion claim, verification, evidence-based, code quality, review request, technical rigor, subagent review, code-reviewer, review gate, merge criteria. Use when: receiving code review feedback, completing major features, making completion claims, requesting systematic reviews, validating before merge, preventing false completion claims."
 ---
 
 # Code Review

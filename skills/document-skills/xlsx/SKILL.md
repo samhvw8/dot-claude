@@ -1,6 +1,6 @@
 ---
 name: xlsx
-description: "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas"
+description: "Excel spreadsheet processing and analysis. Formats: .xlsx, .xlsm, .csv, .tsv. Capabilities: create spreadsheets, formulas (error-free), formatting, data analysis, charts, pivot tables, conditional formatting, data validation, template preservation. Actions: create, edit, analyze, visualize, recalculate spreadsheets. Keywords: Excel, spreadsheet, xlsx, csv, formula, VLOOKUP, SUMIF, pivot table, chart, graph, data analysis, formatting, conditional formatting, data validation, workbook, worksheet, cell reference, named range, macro. Use when: creating spreadsheets, editing Excel files, analyzing tabular data, building formulas, creating charts/graphs, working with CSV/TSV, preserving spreadsheet templates."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 

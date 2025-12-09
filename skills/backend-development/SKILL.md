@@ -1,6 +1,6 @@
 ---
 name: backend-development
-description: Build robust backend systems with modern technologies (Node.js, Python, Go, Rust), frameworks (NestJS, FastAPI, Django), databases (PostgreSQL, MongoDB, Redis), APIs (REST, GraphQL, gRPC), authentication (OAuth 2.1, JWT), testing strategies, security best practices (OWASP Top 10), performance optimization, scalability patterns (microservices, caching, sharding), DevOps practices (Docker, Kubernetes, CI/CD), and monitoring. Use when designing APIs, implementing authentication, optimizing database queries, setting up CI/CD pipelines, handling security vulnerabilities, building microservices, or developing production-ready backend systems.
+description: "Production backend systems development. Stack: Node.js/TypeScript, Python, Go, Rust | NestJS, FastAPI, Django, Express | PostgreSQL, MongoDB, Redis. Capabilities: REST/GraphQL/gRPC APIs, OAuth 2.1/JWT auth, OWASP security, microservices, caching, load balancing, Docker/K8s deployment. Actions: design, build, implement, secure, optimize, deploy, test APIs and services. Keywords: API design, REST, GraphQL, gRPC, authentication, OAuth, JWT, RBAC, database, PostgreSQL, MongoDB, Redis, caching, microservices, Docker, Kubernetes, CI/CD, OWASP, security, performance, scalability, NestJS, FastAPI, Express, middleware, rate limiting. Use when: designing APIs, implementing auth/authz, optimizing queries, building microservices, securing endpoints, deploying containers, setting up CI/CD."
 license: MIT
 version: 1.0.0
 ---

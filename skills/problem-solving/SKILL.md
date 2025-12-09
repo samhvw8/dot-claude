@@ -1,6 +1,6 @@
 ---
-name: Problem-Solving Techniques
-description: Apply systematic problem-solving techniques for complexity spirals (simplification cascades), innovation blocks (collision-zone thinking), recurring patterns (meta-pattern recognition), assumption constraints (inversion exercise), scale uncertainty (scale game), and dispatch when stuck. Techniques derived from Microsoft Amplifier project patterns adapted for immediate application.
+name: problem-solving
+description: "Systematic problem-solving techniques for stuck-ness. Techniques: simplification cascade (complexity spirals), collision-zone thinking (innovation blocks), meta-pattern recognition (recurring issues), inversion exercise (assumption constraints), scale game (uncertainty). Actions: simplify, analyze, recognize patterns, invert assumptions, scale thinking. Keywords: problem solving, complexity spiral, innovation block, stuck, simplification, meta-pattern, assumption inversion, scale uncertainty, breakthrough thinking, root cause, systematic analysis, Microsoft Amplifier, debugging approach, creative solution. Use when: complexity spiraling, hitting innovation blocks, seeing recurring patterns, constrained by assumptions, uncertain about scale, generally stuck on problems."
 version: 2.0.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: shopify
-description: Build Shopify applications, extensions, and themes using GraphQL/REST APIs, Shopify CLI, Polaris UI components, and Liquid templating. Capabilities include app development with OAuth authentication, checkout UI extensions for customizing checkout flow, admin UI extensions for dashboard integration, POS extensions for retail, theme development with Liquid, webhook management, billing API integration, product/order/customer management. Use when building Shopify apps, implementing checkout customizations, creating admin interfaces, developing themes, integrating payment processing, managing store data via APIs, or extending Shopify functionality.
+description: "Shopify platform development. Stack: Shopify CLI, GraphQL/REST APIs, Polaris UI, Liquid templating. Capabilities: app development (OAuth), checkout UI extensions, admin UI extensions, POS extensions, theme development, webhooks, billing API, product/order/customer management. Actions: build, extend, customize, integrate Shopify apps/themes. Keywords: Shopify, Shopify CLI, GraphQL Admin API, REST API, Polaris, Liquid, checkout extension, admin extension, POS extension, theme, webhook, billing API, OAuth, app bridge, metafields, product, order, customer, storefront, hydrogen, oxygen. Use when: building Shopify apps, customizing checkout, creating admin interfaces, developing themes, integrating payments, managing store data via APIs, extending Shopify functionality."
 ---
 
 # Shopify Development

@@ -1,6 +1,6 @@
 ---
-name: Debugging
-description: Systematic debugging framework ensuring root cause investigation before fixes. Includes four-phase debugging process, backward call stack tracing, multi-layer validation, and verification protocols. Use when encountering bugs, test failures, unexpected behavior, performance issues, or before claiming work complete. Prevents random fixes, masks over symptoms, and false completion claims.
+name: debugging
+description: "Systematic debugging methodology with root cause analysis. Phases: investigate, hypothesize, validate, verify. Capabilities: backward call stack tracing, multi-layer validation, verification protocols, symptom analysis, regression prevention. Actions: debug, investigate, trace, analyze, validate, verify bugs. Keywords: debugging, root cause, bug fix, stack trace, error investigation, test failure, exception handling, breakpoint, logging, reproduce, isolate, regression, call stack, symptom vs cause, hypothesis testing, validation, verification protocol. Use when: encountering bugs, analyzing test failures, tracing unexpected behavior, investigating performance issues, preventing regressions, validating fixes before completion claims."
 version: 3.0.0
 languages: all
 ---

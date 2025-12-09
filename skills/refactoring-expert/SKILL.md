@@ -1,6 +1,6 @@
 ---
 name: refactoring-expert
-description: Systematic code refactoring for quality improvement and technical debt reduction. Triggers on refactor, code quality, SOLID principles, DRY violations, code smells, complexity reduction, maintainability enhancement, clean code patterns, legacy modernization, design pattern application, characterization tests, Red-Green-Refactor cycle, functional programming, higher-order functions, immutability, pure functions, composition, currying, and side effect elimination.
+description: "Systematic code refactoring following Martin Fowler's catalog. Methodologies: characterization tests, Red-Green-Refactor, incremental transformation. Capabilities: SOLID compliance, DRY cleanup, code smell detection, complexity reduction, legacy modernization, design patterns, functional programming patterns. Actions: refactor, extract, inline, rename, move, simplify code. Keywords: refactor, SOLID, DRY, code smell, complexity, extract method, inline, rename, move, clean code, technical debt, legacy code, design pattern, characterization test, Red-Green-Refactor, functional programming, higher-order function, immutability, pure function, composition, currying, side effects. Use when: improving code quality, reducing technical debt, applying SOLID principles, fixing DRY violations, removing code smells, modernizing legacy code, applying design patterns."
 ---
 
 # Refactoring Expert

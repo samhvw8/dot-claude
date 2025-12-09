@@ -1,6 +1,6 @@
 ---
 name: mise-expert
-description: Manage tool versions (node, python, go), create task runners, and setup development environments using mise. Use when user requests "install node", "setup mise", "create task", or mentions mise.toml, version manager, tool management, task runner.
+description: "Mise development environment manager (asdf + direnv + make replacement). Capabilities: tool version management (node, python, go, ruby, rust), environment variables, task runners, project-local configs. Actions: install, manage, configure, run tools/tasks with mise. Keywords: mise, mise.toml, tool version, runtime version, node, python, go, ruby, rust, asdf, direnv, task runner, environment variables, version manager, .tool-versions, mise install, mise use, mise run, mise tasks, project config, global config. Use when: installing runtime versions, managing tool versions, setting up dev environments, creating task runners, replacing asdf/direnv/make, configuring project-local tools."
 ---
 
 # Mise Expert Skill

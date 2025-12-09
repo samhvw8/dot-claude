@@ -1,6 +1,6 @@
 ---
 name: docx
-description: "Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks"
+description: "Word document processing. Format: .docx (ZIP/XML structure). Capabilities: create documents, edit content, tracked changes, comments, formatting preservation, text extraction, styles, headers/footers, tables, images. Actions: create, edit, analyze, extract from Word documents. Keywords: Word, docx, document, tracked changes, comments, formatting, styles, headers, footers, tables, images, paragraphs, text extraction, template, mail merge, revision history, document comparison. Use when: creating Word documents, editing docx files, working with tracked changes, adding comments, extracting document content, preserving document formatting."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 

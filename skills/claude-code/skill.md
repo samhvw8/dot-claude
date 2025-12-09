@@ -1,6 +1,6 @@
 ---
 name: claude-code
-description: Use when users ask about Claude Code features, setup, configuration, troubleshooting, slash commands, MCP servers, Agent Skills, hooks, plugins, CI/CD integration, or enterprise deployment. Activate for questions like 'How do I use Claude Code?', 'What slash commands are available?', 'How to set up MCP?', 'Create a skill', 'Fix Claude Code issues', or 'Deploy Claude Code in enterprise'.
+description: "Claude Code CLI tool expertise. Features: autonomous coding, slash commands, MCP servers, Agent Skills, hooks, plugins, CI/CD integration. Capabilities: setup/config, troubleshooting, skill creation, MCP integration, enterprise deployment, workflow automation. Actions: configure, troubleshoot, create, deploy, integrate Claude Code. Keywords: Claude Code, Anthropic, CLI tool, slash command, MCP server, Agent Skill, hook, plugin, CI/CD, enterprise, CLAUDE.md, agentic coding, terminal tool, workflow automation, code generation, skill creation, configuration, authentication, API key. Use when: learning Claude Code features, configuring settings, creating skills/hooks, setting up MCP servers, troubleshooting issues, CI/CD integration, enterprise deployment questions."
 ---
 
 # Claude Code Expert

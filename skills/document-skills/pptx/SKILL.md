@@ -1,6 +1,6 @@
 ---
 name: pptx
-description: "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks"
+description: "PowerPoint presentation processing. Format: .pptx (ZIP/XML structure). Capabilities: create presentations, edit slides, layouts/masters, speaker notes, comments, shapes, images, charts, text extraction, template preservation. Actions: create, edit, analyze, extract from presentations. Keywords: PowerPoint, pptx, presentation, slide, layout, master slide, speaker notes, comments, shapes, images, charts, text extraction, template, slide deck, bullet points, title slide, content slide, animation. Use when: creating presentations, editing PowerPoint files, extracting slide content, modifying layouts, adding speaker notes, working with presentation templates."
 license: Proprietary. LICENSE.txt has complete terms
 ---
 

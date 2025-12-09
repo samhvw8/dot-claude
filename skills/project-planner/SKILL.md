@@ -1,6 +1,6 @@
 ---
 name: project-planner
-description: Create structured, actionable plans for any project type - business, personal, creative, academic, or organizational. Use when user requests "create plan", "project plan", "planning", "how to plan", "plan project", "continue plan", or mentions planning, strategy, roadmap for non-programming projects. Automatically checks docs/plan.md for active plans.
+description: "Universal project planning for non-technical projects. Domains: business, personal, creative, academic, organizational, events. Capabilities: goal setting, milestone planning, resource allocation, timeline creation, risk assessment, progress tracking. Actions: create, plan, structure, breakdown, track projects. Keywords: project plan, roadmap, strategy, goal setting, milestones, timeline, action plan, project management, business plan, personal goals, creative project, academic planning, event planning, organizational change, OKRs, SMART goals, Gantt chart. Use when: creating project plans, setting goals/milestones, planning business initiatives, organizing events, structuring academic work, developing strategies/roadmaps."
 auto_invoke: true
 tags: [planning, project-management, strategy, goal-setting, action-plans, generic-planning]
 ---

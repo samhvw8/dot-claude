@@ -1,6 +1,6 @@
 ---
 name: planning
-description: Use when you need to plan technical solutions that are scalable, secure, and maintainable.
+description: "Technical implementation planning and architecture design. Capabilities: feature planning, system architecture, technical evaluation, implementation roadmaps, requirement breakdown, trade-off analysis, codebase analysis, solution design. Actions: plan, architect, design, evaluate, breakdown technical solutions. Keywords: implementation plan, technical design, architecture, system design, roadmap, requirements analysis, trade-offs, technical evaluation, feature planning, solution design, scalability, security, maintainability, sprint planning, task breakdown. Use when: planning new features, designing system architecture, evaluating technical approaches, creating implementation roadmaps, breaking down complex requirements, assessing technical trade-offs."
 license: MIT
 ---
 

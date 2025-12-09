@@ -1,6 +1,6 @@
 ---
 name: mobile-development
-description: Build modern mobile applications with React Native, Flutter, Swift/SwiftUI, and Kotlin/Jetpack Compose. Covers mobile-first design principles, performance optimization (battery, memory, network), offline-first architecture, platform-specific guidelines (iOS HIG, Material Design), testing strategies, security best practices, accessibility, app store deployment, and mobile development mindset. Use when building mobile apps, implementing mobile UX patterns, optimizing for mobile constraints, or making native vs cross-platform decisions.
+description: "Cross-platform and native mobile development. Frameworks: React Native, Flutter, Swift/SwiftUI, Kotlin/Jetpack Compose. Capabilities: mobile UI, offline-first architecture, push notifications, deep linking, biometrics, app store deployment. Actions: build, create, implement, optimize, test, deploy mobile apps. Keywords: iOS, Android, React Native, Flutter, Swift, Kotlin, mobile app, offline sync, push notification, deep link, biometric auth, App Store, Play Store, iOS HIG, Material Design, battery optimization, memory management, mobile performance. Use when: building mobile apps, implementing mobile-first UX, choosing native vs cross-platform, optimizing battery/memory/network, deploying to app stores, handling mobile-specific features."
 license: MIT
 version: 1.0.0
 ---
